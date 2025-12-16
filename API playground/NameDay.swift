@@ -18,7 +18,7 @@ struct NameDay: View {
             
             var cur = inp.data(using: .utf8)
             
-            var b = object.makeRequest(resource: "V2/getname", method: "POST", body: (content: cur, type: "application/json"))
+            var b = object.makeRequest(resource: "getname", method: "POST", body: (content: cur, type: "application/json"))
             print("\(b.httpMethod ?? "ERROT") \(b.url?.description ?? "ERROT")")
             for i in b.allHTTPHeaderFields ?? [:] {
                         print("\t\(i.key): \(i.value)")
@@ -58,7 +58,7 @@ struct NameDay: View {
 struct nd:api {
     var token: String = ""
     
-    var url : String = "https://nameday.abalin.net"
+    var url : String = "https://nameday.abalin.net:443"
     var apiModifier:String = "api/V2"
     init(){}
 }

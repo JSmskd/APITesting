@@ -53,7 +53,7 @@ extension api {
     func makeRequest(resource:String, accept:String = "application/json",method:String = "GET", body: (content:Data?, type:String) = (nil,"")) -> URLRequest {
 //        let hasBody = (body.content ?? Data()).count > 0
         var r = URLRequest(url: URL(string: endpoint + resource)!)
-
+        print(r.url)
         setHeaders(req: &r,acceptType: accept, contentType: body.type)
 //        setHeaders(req: &r,)
         r.httpMethod = method

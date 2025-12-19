@@ -11,8 +11,9 @@ import SwiftUI
 struct APIPApp: App {
     var body: some Scene {
         WindowGroup {
-            NameDay()
+//            NameDay()
 //            ContentView()
+            WhereAmI()
         }
     }
 }

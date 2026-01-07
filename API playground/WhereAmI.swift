@@ -9,30 +9,56 @@ import SwiftUI
 
 //https://api.myip.com
 struct WhereAmI: View {
-    var object:ip = .init()
+    var objecta:ip = .init()
+    var objectb:ipcountry = .init()
     @State var userAdress: String = ""
     @State var country: String = ""
     @State var cc: String = ""
     var body: some View {
-        Text(userAdress)
-        Text(country)
-Text(cc)
+        Text("IPAdress - \(userAdress)")
+        Text("countrty - \(country)")
+        Text("country ISO code - \(cc)")
         Button("THIS WILL GET YOUR IP") {
-            var b = object.makeRequest(resource: "")
+            var b = objecta.makeRequest(resource: "")
             global.session.dataTask(with: b) { data, urlr, e in
                 if let e = e {
                     print(e)
                 }
-                print(data)
+//                print(data)
                 if let data = data, let data = try? JSONSerialization.jsonObject(with: data) as? [String: Any]  {
                     print(data)
                     userAdress = data["ip"] as? String ?? userAdress
                     country = data["country"] as? String ?? country
-                    cc = data["cc"] as? String ?? cc
+//                    cc = data["cc"] as? String ?? cc
+                    if let adress = data["ip"] as? String {
+                        var bb = objectb.makeRequest(resource: adress)
+                        global.session.dataTask(with: bb) { data, urlr, e in
+                            if let e = e {
+                                print(e)
+                            }
+//                        print(data)
+                            if let data = data, let data = try? JSONSerialization.jsonObject(with: data) as? [String: Any]  {
+                                print(data)
+                                cc = data["country"] as? String ?? cc
+//                            userAdress = data["ip"] as? String ?? userAdress
+//                            country = data["country"] as? String ?? country
+//                            cc = data["cc"] as? String ?? cc
+                            }
+                        }.resume()
+                    }
                 }
             }.resume()
         }
     }
+    
+    struct ipcountry:api {
+        var token: String = ""
+        
+        var url : String = "https://api.country.is:443"
+        var apiModifier:String = ""
+        init(){}
+    }
+
     struct ip:api {
         var token: String = ""
         

@@ -11,9 +11,11 @@ import SwiftUI
 struct APIPApp: App {
     var body: some Scene {
         WindowGroup {
+            NavigationStack{
 //            NameDay()
-//            ContentView()
-            WhereAmI()
+                ContentView()
+//            WhereAmI()
+            }
         }
     }
 }

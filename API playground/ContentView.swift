@@ -15,6 +15,7 @@ struct ContentView: View {
             Text("name day")
         }
         NavigationLink {
+            WhereAmI()
             //            <#code#>
         } label: {
             Text("Where am I")

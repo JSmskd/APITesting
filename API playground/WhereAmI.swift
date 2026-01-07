@@ -11,17 +11,24 @@ import SwiftUI
 struct WhereAmI: View {
     var object:ip = .init()
     @State var userAdress: String = ""
+    @State var country: String = ""
+    @State var cc: String = ""
     var body: some View {
+        Text(userAdress)
+        Text(country)
+Text(cc)
         Button("THIS WILL GET YOUR IP") {
             var b = object.makeRequest(resource: "")
             global.session.dataTask(with: b) { data, urlr, e in
                 if let e = e {
-//                    print(e)
+                    print(e)
                 }
                 print(data)
                 if let data = data, let data = try? JSONSerialization.jsonObject(with: data) as? [String: Any]  {
                     print(data)
                     userAdress = data["ip"] as? String ?? userAdress
+                    country = data["country"] as? String ?? country
+                    cc = data["cc"] as? String ?? cc
                 }
             }.resume()
         }
